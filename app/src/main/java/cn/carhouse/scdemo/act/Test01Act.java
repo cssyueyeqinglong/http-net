@@ -51,15 +51,11 @@ import rx.schedulers.Schedulers;
 
 public class Test01Act extends AppCompatActivity {
 
-    private TextView tv;
-    private ImageView iv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_test_01);
-        tv = (TextView) findViewById(R.id.tv);
-        iv = (ImageView) findViewById(R.id.iv);
 //        getData();
 //        xutlsData();
 //        retrofitData();
@@ -124,7 +120,7 @@ public class Test01Act extends AppCompatActivity {
     }
 
     private void xutlsData() {
-        x.image().bind(iv, "http://pic.baike.soso.com/p/20090711/20090711101754-314944703.jpg");
+//        x.image().bind(iv, "http://pic.baike.soso.com/p/20090711/20090711101754-314944703.jpg");
         Gson gson = new Gson();
         RequestParams params = new RequestParams("http://mapi.linshaopeng.com:8080/mapi/user/business/login.json");
         Map<String, Object> maps = new HashMap<String, Object>();

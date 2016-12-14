@@ -30,7 +30,7 @@ public class Fmt02 extends BaseTitleFmt {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fmt_01;
+        return R.layout.fmt_03;
     }
 
     @Override
