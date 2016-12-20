@@ -11,21 +11,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.carhouse.scdemo.BaseBean;
 import cn.carhouse.scdemo.R;
+import cn.carhouse.scdemo.base.BaseAdapterHelper;
 import cn.carhouse.scdemo.base.LoadingAndRetryManager;
 import cn.carhouse.scdemo.base.OnLoadingAndRetryListener;
+import cn.carhouse.scdemo.base.QuickAdapter;
 import cn.carhouse.scdemo.base.RcyBaseHolder;
 import cn.carhouse.scdemo.base.RcyQuickAdapter;
 
 /**
  * Created by Administrator
  * on 2016/11/29.
- * des:
+ * des:滑动停止时有弹性的listView
  */
 
 public class Vp1Fmt extends Fragment {
@@ -33,18 +36,12 @@ public class Vp1Fmt extends Fragment {
     private int state;
 
     private MyAdapter mAdapter;
-    private RecyclerView mRcv;
+    private ListView mRcv;
 
     private LoadingAndRetryManager manager;
 
     List<BaseBean> mDatas = new ArrayList<BaseBean>();
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-        }
-    };
 
     public static Vp1Fmt newInstance(int position) {
 
@@ -64,7 +61,7 @@ public class Vp1Fmt extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fmt_02, null);
+        View view = inflater.inflate(R.layout.fmt_vp01, null);
         findViews(view);
         return view;
     }
@@ -77,7 +74,7 @@ public class Vp1Fmt extends Fragment {
 
     private void findViews(View view) {
 
-        mRcv = (RecyclerView) view.findViewById(R.id.rcv);
+        mRcv = (ListView) view.findViewById(R.id.rcv);
 
     }
 
@@ -93,13 +90,8 @@ public class Vp1Fmt extends Fragment {
 
     private void handleData() {
         if (mAdapter == null) {
-            mAdapter = new MyAdapter(addData(state * 2), R.layout.item_rcv,
+            mAdapter = new MyAdapter(addData(state * 20), R.layout.item_rcv,
                     getContext());
-        }
-        if (null == mRcv.getLayoutManager()) {
-            LinearLayoutManager manager = new LinearLayoutManager(getContext());
-            manager.setOrientation(LinearLayoutManager.VERTICAL);
-            mRcv.setLayoutManager(manager);
         }
         if (null == mRcv.getAdapter()) {
             mRcv.setAdapter(mAdapter);
@@ -118,29 +110,17 @@ public class Vp1Fmt extends Fragment {
         });
         manager.showContent();
 
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                List<BaseBean> datas = addData(state * 2);
-                if (datas.size() == 0) {
-                    manager.showEmpty();
-                } else manager.showContent();
-            }
-        }, 1500);
-
-
     }
 
-    private class MyAdapter extends RcyQuickAdapter<BaseBean> {
-
+    private class MyAdapter extends QuickAdapter<BaseBean> {
 
         public MyAdapter(List<BaseBean> data, int layoutId, Context context) {
-            super(data, layoutId, context);
+            super(context, layoutId, data);
         }
 
+
         @Override
-        public void convert(RcyBaseHolder holder, BaseBean item, int position) {
+        protected void convert(BaseAdapterHelper helper, BaseBean item) {
 
         }
     }

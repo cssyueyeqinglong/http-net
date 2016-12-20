@@ -131,6 +131,8 @@ public class Test01View extends View {
         drawBrokenLine(canvas);
 
         drawPoints(canvas);
+
+
     }
 
     /**
@@ -157,6 +159,21 @@ public class Test01View extends View {
 
 
     private void drawText(Canvas canvas) {
+        textPaint.setTextSize(dip2px(12));
+        textPaint.setStyle(Paint.Style.STROKE);
+        textPaint.setColor(Color.parseColor("#ff0f00"));
+        canvas.drawPosText("hello", new float[]{viewWith * 0.2f, viewWith * 0.2f,
+                viewWith * 0.2f + 20, viewWith * 0.2f + 20,
+                viewWith * 0.2f + 20 * 2, viewWith * 0.2f + 20 * 2,
+                viewWith * 0.2f + 20 * 3, viewWith * 0.2f + 20 * 3,
+                viewWith * 0.2f + 20 * 4, viewWith * 0.2f + 20 * 4}, textPaint);
+
+        canvas.drawPosText(new char[]{'h', 'e', 'l', 'l', 'o'}, 0, 5, new float[]{viewWith * 0.3f, viewWith * 0.3f,
+                viewWith * 0.3f + 20, viewWith * 0.3f + 20,
+                viewWith * 0.3f + 20 * 2, viewWith * 0.3f + 20 * 2,
+                viewWith * 0.3f + 20 * 3, viewWith * 0.3f + 20 * 3,
+                viewWith * 0.3f + 20 * 4, viewWith * 0.3f + 20 * 4}, textPaint);
+
         canvas.drawText(String.valueOf(maxScore), viewWith * 0.1f - dip2px(10), viewHeight * 0.15f, textPaint);
         canvas.drawText(String.valueOf(minScore), viewWith * 0.1f - dip2px(10), viewHeight * 0.5f, textPaint);
 

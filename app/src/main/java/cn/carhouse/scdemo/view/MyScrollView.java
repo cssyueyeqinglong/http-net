@@ -1,6 +1,7 @@
 package cn.carhouse.scdemo.view;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -19,6 +20,7 @@ public class MyScrollView extends ViewGroup {
 
     private double mScreenHeight;
     private Scroller mScroller;
+    private int mStart;
 
     public MyScrollView(Context context) {
         super(context);
@@ -42,6 +44,11 @@ public class MyScrollView extends ViewGroup {
 
     }
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        Log.d("tag", "onDraw=======");
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -51,8 +58,7 @@ public class MyScrollView extends ViewGroup {
             View childAt = getChildAt(i);
             measureChild(childAt, widthMeasureSpec, heightMeasureSpec);
         }
-
-
+        Log.d("tag", "onMeasure=======");
     }
 
     @Override
@@ -69,6 +75,8 @@ public class MyScrollView extends ViewGroup {
                 childAt.layout(l, (int) (i * mScreenHeight), r, (int) ((i + 1) * mScreenHeight));
             }
         }
+
+        Log.d("tag", "onLayout===========");
     }
 
     int mLastY = 0;
@@ -77,35 +85,54 @@ public class MyScrollView extends ViewGroup {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                mStart = getScrollY();
                 mLastY = (int) event.getRawY();
-                Log.d("tag", "otionEvent.ACTION_DOWN======" + event.getRawY() + ",mScreenHeight===" + mScreenHeight);
                 break;
             case MotionEvent.ACTION_MOVE:
-                Log.d("tag", "otionEvent.ACTION_MOVE======" + event.getRawY());
                 if (!mScroller.isFinished()) {
                     mScroller.abortAnimation();
                 }
                 int dy = (int) (mLastY - event.getRawY());
 
-                Log.d("tag", "dy======" + dy);
-                Log.d("tag", "getScrollY======" + getScrollY());
-                Log.d("tag", "getHeight======" + getHeight());
                 if (getScrollY() < 0) {
-                    dy = getScrollY() + dy;
+                    dy = 0;
                 }
-//                if (getScrollY() > getHeight() - mScreenHeight) {
-//                    dy = 0;
-//                }
+                if (getScrollY() > getHeight() - mScreenHeight) {
+                    dy = 0;
+                }
                 scrollBy(0, dy);
                 mLastY = (int) event.getRawY();
                 break;
             case MotionEvent.ACTION_UP:
+                int scrollY = getScrollY();
+                int dScrollY = scrollY - mStart;
+                if (dScrollY > 0) {
+                    if (dScrollY < mScreenHeight / 3) {
+                        mScroller.startScroll(0, getScrollY(), 0, -dScrollY);
+                    } else {
+                        mScroller.startScroll(0, getScrollY(), 0, (int) (mScreenHeight - dScrollY));
+                    }
+                } else {
+                    if (-dScrollY < mScreenHeight / 3) {
+                        mScroller.startScroll(0, getScrollY(), 0, -dScrollY);
+                    } else {
+                        mScroller.startScroll(0, getScrollY(), 0, (int) (-mScreenHeight - dScrollY));
+                    }
+                }
 
                 break;
         }
-
+        postInvalidate();
         return true;
-//        return super.onTouchEvent(event);
 
+    }
+
+    @Override
+    public void computeScroll() {
+        super.computeScroll();
+        if (mScroller.computeScrollOffset()) {
+            scrollTo(0, mScroller.getCurrY());
+            postInvalidate();
+        }
     }
 }

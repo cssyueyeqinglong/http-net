@@ -55,12 +55,12 @@ public class TestAct extends FragmentActivity {
 
         @Override
         public int getCount() {
-            return 4;
+            return 5;
         }
 
         @Override
         public Fragment getItem(int position) {
-            return VpFmt.newInstance(position);
+            return mDatas.get(position);
         }
 
         @Override
