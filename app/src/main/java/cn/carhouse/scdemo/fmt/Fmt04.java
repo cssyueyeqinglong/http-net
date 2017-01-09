@@ -40,7 +40,7 @@ public class Fmt04 extends BaseTitleFmt {
         view.findViewById(R.id.circle).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                addFragment(Vp3Fmt.newInstance(0));
+                addFragment(Fmt05.newInstance());
             }
         });
     }

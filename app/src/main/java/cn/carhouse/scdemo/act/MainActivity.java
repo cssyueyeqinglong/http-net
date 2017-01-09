@@ -1,6 +1,9 @@
 package cn.carhouse.scdemo.act;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
                 holder.getView().setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(MainActivity.this,Main2Activity.class));
+                        Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                        Intent intent1 = new Intent();
+                        Log.e("isAviable","isAviable=0="+isIntentAvailable(MainActivity.this,intent));
+                        Log.e("isAviable","isAviable=1="+isIntentAvailable(MainActivity.this,intent1));
+                        startActivity(intent);
                     }
                 });
             }
@@ -65,6 +72,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    @SuppressWarnings("WrongConstant")
+    public static boolean isIntentAvailable(Context context, Intent intent) {
+        final PackageManager packageManager = context.getPackageManager();
+        if (packageManager == null) {
+            return false;
+        }
+        int getActivities = PackageManager.GET_ACTIVITIES;
+        List<ResolveInfo> list = packageManager.queryIntentActivities(intent, getActivities);
+        if (list == null) {
+            return false;
+        }
+        return list.size() > 0;
+    }
 
 }

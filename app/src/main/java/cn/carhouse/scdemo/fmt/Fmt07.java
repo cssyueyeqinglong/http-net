@@ -5,23 +5,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import cn.carhouse.scdemo.base.BaseTitleFmt;
 import cn.carhouse.scdemo.R;
+import cn.carhouse.scdemo.base.BaseTitleFmt;
 
 /**
  * Created by Administrator
  * on 2016/11/26.
- * des:
+ * des:颜色矩阵
  */
 
-public class Fmt02 extends BaseTitleFmt {
+public class Fmt07 extends BaseTitleFmt {
 
 
-    public static Fmt02 newInstance() {
+    public static Fmt07 newInstance() {
 
         Bundle args = new Bundle();
-
-        Fmt02 fragment = new Fmt02();
+        Fmt07 fragment = new Fmt07();
         fragment.setArguments(args);
         return fragment;
     }
@@ -30,7 +29,7 @@ public class Fmt02 extends BaseTitleFmt {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fmt_03;
+        return R.layout.fmt_012;
     }
 
     @Override
@@ -40,16 +39,17 @@ public class Fmt02 extends BaseTitleFmt {
 
     @Override
     protected void handleData() {
-        tv.setTextColor(Color.parseColor("#ff0000"));
-        tv.setText("Fmt02==========");
+        tv.setTextColor(Color.parseColor("#00ff00"));
+        tv.setText(this.getClass().getSimpleName() + "=========");
     }
+
 
     @Override
     protected void initEvents() {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFragment(Fmt03.newInstance());
+                addFragment(Fmt08.newInstance());
             }
         });
 
@@ -59,4 +59,5 @@ public class Fmt02 extends BaseTitleFmt {
     public String getTitle() {
         return this.getClass().getSimpleName();
     }
+
 }

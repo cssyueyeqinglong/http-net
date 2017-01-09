@@ -8,9 +8,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -72,16 +74,39 @@ public class Vp1Fmt extends Fragment {
         handleData();
     }
 
+    private View headView;
+
     private void findViews(View view) {
 
         mRcv = (ListView) view.findViewById(R.id.rcv);
 
+        mRcv.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+                if (headView == null) {
+                    headView = mRcv.getChildAt(1-firstVisibleItem);
+                }
+
+                if (headView != null) {
+                    int adViewTopSpace = headView.getTop();
+                    Log.e("top","top=="+adViewTopSpace);
+                }
+
+
+            }
+        });
     }
 
 
     private List<BaseBean> addData(int count) {
         mDatas.clear();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < 200; i++) {
             mDatas.add(new BaseBean());
         }
         return mDatas;
