@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/instance_02">
+
+    <target
+        android:name="sun"
+        android:animation="@anim/instance_ani_03_sun" />
+    <target
+        android:name="earch"
+        android:animation="@anim/instance_ani_03_earch"/>
+</animated-vector>
