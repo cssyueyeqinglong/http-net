@@ -60,27 +60,31 @@ public class Fmt11 extends BaseTitleFmt {
         tv.setTextColor(Color.parseColor("#00ff00"));
         tv.setText(this.getClass().getSimpleName() + "=========");
 
-        //3d动画
-        MyOwnAnimator3D animator = new MyOwnAnimator3D();
-        animator.setDuration(2000);
-        tv.setAnimation(animator);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            //3d动画
+            MyOwnAnimator3D animator = new MyOwnAnimator3D();
+            animator.setDuration(2000);
+            tv.setAnimation(animator);
 
 
-        iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startAnimation();
-            }
-        });
-        iv1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Drawable drawable = iv1.getDrawable();
-                if (drawable instanceof Animatable) {
-                    ((Animatable) drawable).start();
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startAnimation();
                 }
-            }
-        });
+            });
+            iv1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Drawable drawable = iv1.getDrawable();
+                    if (drawable instanceof Animatable) {
+                        ((Animatable) drawable).start();
+                    }
+                }
+            });
+        }
+
     }
 
     private void startAnimation() {
@@ -95,7 +99,7 @@ public class Fmt11 extends BaseTitleFmt {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                addFragment(Fmt11.newInstance());
+                addFragment(Fmt12.newInstance());
             }
         });
         tv1.setOnClickListener(new View.OnClickListener() {

@@ -2,32 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
         android:gravity="center"
         android:minHeight="80dp"
+        android:text="测试"
         android:textColor="#000000"
         android:textSize="18dp" />
 
-
-    <cn.carhouse.scdemo.view.Test11View
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv"
         android:layout_width="match_parent"
-        android:layout_height="80dp" />
-
-
-    <ImageView
-        android:id="@+id/iv"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@mipmap/flzd_srgk_cz_icon" />
-
-    <cn.carhouse.scdemo.view.Test01View
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_weight="1" />
-
+        android:layout_height="match_parent" />
 </LinearLayout>

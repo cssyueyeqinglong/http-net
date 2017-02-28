@@ -34,7 +34,7 @@ public class Test01View extends View {
     private String[] monthText = new String[]{"6月", "7月", "8月", "9月", "10月", "11月"};
     private int[] score = new int[]{560, 700, 580, 650, 720, 580};
     private int monthCount = 6;
-    private int selectMonth = 6;//选中的月份
+    private int selectMonth = 6;//选中的money
     private Paint monthPaint;
     private Path brokenPath;
     private Paint brokenPaint;

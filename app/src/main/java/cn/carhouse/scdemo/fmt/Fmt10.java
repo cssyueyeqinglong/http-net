@@ -1,5 +1,6 @@
 package cn.carhouse.scdemo.fmt;
 
+import android.app.ActivityManager;
 import android.graphics.Color;
 import android.graphics.drawable.Animatable;
 import android.os.Bundle;
@@ -52,21 +53,25 @@ public class Fmt10 extends BaseTitleFmt {
         tv.setTextColor(Color.parseColor("#00ff00"));
         tv.setText(this.getClass().getSimpleName() + "=========");
 
-        //布局中加入动画，让子控件动起来
-        ScaleAnimation scaleAnimation = new ScaleAnimation(0, 1, 0, 1);
-        scaleAnimation.setDuration(200);
-        LayoutAnimationController controller = new LayoutAnimationController(scaleAnimation, 0.5f);
-        controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
-        ll.setLayoutAnimation(controller);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+
+            //布局中加入动画，让子控件动起来
+            ScaleAnimation scaleAnimation = new ScaleAnimation(0, 1, 0, 1);
+            scaleAnimation.setDuration(200);
+            LayoutAnimationController controller = new LayoutAnimationController(scaleAnimation, 0.5f);
+            controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
+            ll.setLayoutAnimation(controller);
 
 
-        //3d动画
-        MyOwnAnimator3D animator = new MyOwnAnimator3D();
-        animator.setDuration(2000);
-        tv.setAnimation(animator);
+            //3d动画
+            MyOwnAnimator3D animator = new MyOwnAnimator3D();
+            animator.setDuration(2000);
+            tv.setAnimation(animator);
 
-        //svg动画
-        ((Animatable) iv.getDrawable()).start();
+            //svg动画
+            ((Animatable) iv.getDrawable()).start();
+        }
     }
 
 
