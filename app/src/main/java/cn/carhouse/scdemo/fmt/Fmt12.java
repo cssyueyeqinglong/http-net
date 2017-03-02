@@ -1,5 +1,6 @@
 package cn.carhouse.scdemo.fmt;
 
+import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
@@ -76,6 +77,17 @@ public class Fmt12 extends BaseTitleFmt {
         mRcv.setLayoutManager(manager);
         mRcv.setAdapter(new MyAdapter());
 
+
+        ValueAnimator animator1=ValueAnimator.ofInt(0,100);
+        animator1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                tv.setText(animation.getAnimatedValue()+"$");
+            }
+        });
+        animator1.setDuration(3000);
+        animator1.start();
+
     }
 
 
@@ -98,7 +110,7 @@ public class Fmt12 extends BaseTitleFmt {
 
         @Override
         public int getItemCount() {
-            return 30;
+            return 10;
         }
     }
 
@@ -118,7 +130,7 @@ public class Fmt12 extends BaseTitleFmt {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                addFragment(Fmt11.newInstance());
+                addFragment(Fmt13.newInstance());
             }
         });
 
