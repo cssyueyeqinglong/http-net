@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.database.Cursor;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +75,17 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("LOG", dx + "===========onScrolled===============" + dy);
             }
         });
+
+
+        Uri uri=Uri.parse("content://cy.com.allview.contentprovider.bookprovider/user");
+        Cursor cursor = getContentResolver().query(uri, new String[]{"_id,name,sex"}, null, null, null);
+        while (cursor.moveToNext()){//有数据
+            int id=cursor.getInt(0);
+            String name=cursor.getString(1);
+            int sex=cursor.getInt(2);
+            Logger.d("name==" + name + ",id==" + id + ",age=" + sex);
+        }
+        cursor.close();
     }
     @SuppressWarnings("WrongConstant")
     public static boolean isIntentAvailable(Context context, Intent intent) {

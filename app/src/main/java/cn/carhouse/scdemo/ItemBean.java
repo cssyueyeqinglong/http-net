@@ -1,6 +1,8 @@
 package cn.carhouse.scdemo;
 
 import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by Administrator
@@ -8,10 +10,11 @@ import android.graphics.Bitmap;
  * des:
  */
 
-public class ItemBean {
+public class ItemBean implements Parcelable{
     private int mItemId;
     private int mBitmapId;
     private Bitmap mBitmap;
+    private BaseBean mBean;
 
     public ItemBean() {
     }
@@ -45,4 +48,38 @@ public class ItemBean {
     public void setmBitmap(Bitmap mBitmap) {
         this.mBitmap = mBitmap;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {//序列化
+        dest.writeInt(mBitmapId);
+        dest.writeInt(mItemId);
+        dest.writeParcelable(mBitmap,flags);
+        dest.writeParcelable(mBean,flags);
+    }
+
+    //反序列化
+    public static final Creator<ItemBean> CREATOR = new Creator<ItemBean>() {
+        @Override
+        public ItemBean createFromParcel(Parcel in) {
+            return new ItemBean(in);
+        }
+
+        @Override
+        public ItemBean[] newArray(int size) {
+            return new ItemBean[size];
+        }
+    };
+    protected ItemBean(Parcel in) {
+        mItemId = in.readInt();
+        mBitmapId = in.readInt();
+        mBitmap = in.readParcelable(Bitmap.class.getClassLoader());
+        mBean=in.readParcelable(Thread.currentThread().getContextClassLoader());
+    }
+
+
 }

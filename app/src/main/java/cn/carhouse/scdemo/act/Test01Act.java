@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.orhanobut.logger.Logger;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,16 +65,14 @@ public class Test01Act extends AppCompatActivity {
 
     private void okhttpData() {
 
-        Log.e("thread",Thread.currentThread().getName());
-
 
         OkHttpClient client = new OkHttpClient();
         Map<String, Object> maps = new HashMap<String, Object>();
         maps.put("head", new Head());
         maps.put("data", new Data());
-
+        Logger.json(new Gson().toJson(maps));
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), new Gson().toJson(maps));
-        Request request = new Request.Builder().url("http://mapi.linshaopeng.com:8080/mapi/user/business/login.json").post(body).build();
+        Request request = new Request.Builder().url("http://carhouse.imwork.net:8888/mapi/user/business/login.json").post(body).build();
         okhttp3.Call call = client.newCall(request);
         call.enqueue(new okhttp3.Callback() {
             @Override
@@ -84,8 +83,7 @@ public class Test01Act extends AppCompatActivity {
             @Override
             public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
                 String str = response.body().string();
-                Log.i("wangshu", str);
-                Log.e("thread",Thread.currentThread().getName());
+                Logger.json(str);
             }
         });
     }

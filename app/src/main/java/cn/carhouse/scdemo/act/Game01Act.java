@@ -1,5 +1,6 @@
 package cn.carhouse.scdemo.act;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -178,6 +179,10 @@ public class Game01Act extends AppCompatActivity {
         tvTime.setText("" + time);
     }
 
+    public void nextAct(View view){
+        startActivity(new Intent(this,Game02Act.class));
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -186,4 +191,5 @@ public class Game01Act extends AppCompatActivity {
         mTimerTask.cancel();
         mTimerTask = null;
     }
+
 }
