@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         Uri uri=Uri.parse("content://cy.com.allview.contentprovider.bookprovider/user");
         Cursor cursor = getContentResolver().query(uri, new String[]{"_id,name,sex"}, null, null, null);
+        if(cursor==null)return;
         while (cursor.moveToNext()){//有数据
             int id=cursor.getInt(0);
             String name=cursor.getString(1);

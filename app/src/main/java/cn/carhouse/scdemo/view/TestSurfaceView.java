@@ -96,6 +96,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         try {
             mCanvas = mSurfaceHolder.lockCanvas();
             //drawSomeThing
+            mCanvas.save();
             mCanvas.drawColor(Color.WHITE);//surfaceView背景
             mCanvas.drawPath(mPath, mPaint);
             mCanvas.translate(100,0);

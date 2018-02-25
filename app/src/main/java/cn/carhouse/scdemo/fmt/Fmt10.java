@@ -70,7 +70,7 @@ public class Fmt10 extends BaseTitleFmt {
             tv.setAnimation(animator);
 
             //svg动画
-            ((Animatable) iv.getDrawable()).start();
+//            ((Animatable) iv.getDrawable()).start();
         }
     }
 

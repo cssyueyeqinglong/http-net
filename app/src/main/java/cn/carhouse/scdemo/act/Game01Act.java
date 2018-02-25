@@ -65,6 +65,9 @@ public class Game01Act extends AppCompatActivity {
             scrBitmap = imageUtils.resizeBitmap(200, 200, scrBitmap);
         }
         imageUtils.createInitBitmaps(TYPE, scrBitmap, this);//生成有序的GameUtils.mItemBeans
+        for (int i = 0; i < GameUtils.mItemBeans.size(); i++) {
+            Log.d("tag", GameUtils.mItemBeans.get(i).toString());
+        }
 //        打乱顺序
         GameUtils.getPuzzleGenerator();
 
@@ -132,9 +135,7 @@ public class Game01Act extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (GameUtils.isMoveable(position)) {//当前点击页面是活动的
-                        Log.d("data", "GameUtils.mItemBeans.get(position).bitmapId=============================" + GameUtils.mItemBeans.get(position).getmBitmapId());
                         GameUtils.swapItems(GameUtils.mItemBeans.get(position), GameUtils.mBlackItemBean);
-                        Log.d("data", "GameUtils.mItemBeans.get(position).bitmapId=" + GameUtils.mItemBeans.get(position).getmBitmapId());
                         step += 1;
                         tvStep.setText("" + step);
                         if (GameUtils.isSuccess()) {
@@ -142,7 +143,6 @@ public class Game01Act extends AppCompatActivity {
                             GameUtils.mItemBeans.get(TYPE * TYPE - 1).setmBitmap(mLastBitmap);
                             mTimerTask.cancel();
                             mTimer.cancel();
-
                         }
                         notifyDataSetChanged();
                     }
@@ -179,8 +179,8 @@ public class Game01Act extends AppCompatActivity {
         tvTime.setText("" + time);
     }
 
-    public void nextAct(View view){
-        startActivity(new Intent(this,Game02Act.class));
+    public void nextAct(View view) {
+        startActivity(new Intent(this, Game02Act.class));
     }
 
     @Override

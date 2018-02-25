@@ -17,12 +17,6 @@ public class LoginData {
      */
 
     public HeadBean head;
-    /**
-     * result : true
-     * userInfo : {"businessId":8421,"userType":1,"loginName":"13242429815","avatar":"http://img.car-house.cn/none.png","mobile":"13242429815","nickName":"132****9815","referralCode":"007551020","isCheck":100,"remark":"","paidGoodsOrderNumber":0,"hasSixCodePass":1,"score":0,"money":0,"status":1,"infoStatus":100,"belongBusinessId":37,"IMUserName":"dd04ebab3e834c5c961510197bb6d522","IMUserPass":"d8dd453d6349a1e43a23c3502ca03319","IMNickName":"13242429815","imuserName":"dd04ebab3e834c5c961510197bb6d522","imuserPass":"d8dd453d6349a1e43a23c3502ca03319","imnickName":"13242429815","businessInfo":{}}
-     * adminIMInfo : {"adminUserName":"kefu1","adminUserAvatar":"http://img.car-house.cn/Upload/customer/customerservice-icon/kefu_touxiang@3x.png","adminNickName":"爱车小屋"}
-     * token : {"tokenStatus":100,"userToken":"942854c3081b4963b2dce460e73b02c8","createTime":null,"appId":1,"expireDuration":600000,"startTime":1481091379652,"endTime":null,"userTokenId":137132,"userType":1,"userId":8421}
-     */
 
     public DataBean data;
 

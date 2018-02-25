@@ -10,13 +10,18 @@ import android.os.Parcelable;
  * des:
  */
 
-public class ItemBean implements Parcelable{
+public class ItemBean implements Parcelable {
     private int mItemId;
     private int mBitmapId;
     private Bitmap mBitmap;
     private BaseBean mBean;
 
     public ItemBean() {
+    }
+
+    @Override
+    public String toString() {
+        return "bitmap==" + getmBitmap().hashCode() + ",  bitmapId=" + getmBitmapId() + ",  itemID=" + getmItemId();
     }
 
     public ItemBean(int mItemId, int mBitmapId, Bitmap mBitmap) {
@@ -58,8 +63,8 @@ public class ItemBean implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {//序列化
         dest.writeInt(mBitmapId);
         dest.writeInt(mItemId);
-        dest.writeParcelable(mBitmap,flags);
-        dest.writeParcelable(mBean,flags);
+        dest.writeParcelable(mBitmap, flags);
+        dest.writeParcelable(mBean, flags);
     }
 
     //反序列化
@@ -74,11 +79,12 @@ public class ItemBean implements Parcelable{
             return new ItemBean[size];
         }
     };
+
     protected ItemBean(Parcel in) {
         mItemId = in.readInt();
         mBitmapId = in.readInt();
         mBitmap = in.readParcelable(Bitmap.class.getClassLoader());
-        mBean=in.readParcelable(Thread.currentThread().getContextClassLoader());
+        mBean = in.readParcelable(Thread.currentThread().getContextClassLoader());
     }
 
 
